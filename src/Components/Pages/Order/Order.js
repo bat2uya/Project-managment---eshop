@@ -17,8 +17,6 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 
-
-
 const mapStateToProps = state => {
   return {
     checkedOutItems: state.checkedOutItems
@@ -43,7 +41,7 @@ class ConnectedOrder extends Component {
     defaultOption : '',
     cards: [],
   };
-  this.handleChangeStatus = this.handleChangeStatus.bind(this);
+     this.handleChangeStatus = this.handleChangeStatus.bind(this);
   }
 
  handleChangeStatus(event) {
@@ -63,7 +61,7 @@ class ConnectedOrder extends Component {
     
      let data = {customerId: customerId,address: address,bankCardDto : tmp[0]};
 
-console.log(data);
+     console.log(data);
     //   private String street;
     // private String city;
     // private String state;
