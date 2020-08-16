@@ -10,6 +10,10 @@ import TableRow from "@material-ui/core/TableRow";
 import { setCheckedOutItems } from "../../../Redux/Actions";
 import TextField from "@material-ui/core/TextField";
 import Grid from '@material-ui/core/Grid';
+
+import axios from "axios";
+import server from "../../../server.json";
+
 const mapStateToProps = state => {
   return {
     checkedOutItems: state.checkedOutItems
@@ -20,43 +24,64 @@ const mapStateToProps = state => {
 class MyOrders extends Component {
  
   state = {
-    fullname: "",
-    addressline1: "",
-    addressline2: "",
-    city: "",
-    state: "",
-    zip: "",
+    data:[], 
     redirectToReferrer: false,
     error:""
 
   };
-  render() {
-    let totalPrice = this.props.checkedOutItems.reduce((accumulator, item) => {
-      return accumulator + item.price * item.quantity;
-    }, 0);
 
+  componentDidMount = async () => {
+    var customerId = localStorage.getItem('user');
+    const token = localStorage.userToken;
+    let userName = localStorage.getItem('userName');
+     
+     await axios
+        .get(server.url + "/orders/" + userName
+       , {
+         headers: {
+         'Content-Type': 'application/json',
+         Accept: 'application/json',
+         'Authorization': `Bearer ${token}`
+       },
+       }
+     )
+       .then((result) => {   
+         
+        console.log(result.data.length + '0000000000000000000000000000000000000000');
+
+         if(result.data !== null)
+         {
+                 
+            this.setState({ data: result.data})
+         }          
+     })
+     .catch((err) => this.setState({ error: err.response }));
+ }
+
+  render() {
+  
     return (
       <div style={{ padding: 10 }}>
         <div style={{ fontSize: 24, marginTop: 10 }}>My orders</div>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Order number</TableCell>
-              <TableCell>Price</TableCell>
-              <TableCell>Quantity</TableCell>
+              <TableCell>Order Number</TableCell>
+              <TableCell>Ordered aDte</TableCell>
+              <TableCell>Total Cost</TableCell>
               <TableCell>Shipped date</TableCell>
               <TableCell>Delivered date</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.checkedOutItems.map((item, index) => {
+            {this.state.data.map((item, index) => {
               return (
-                <TableRow key={item.id}>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.price}</TableCell>
-                  <TableCell>{item.quantity}</TableCell>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
+                <TableRow key={item.orderNumber}>
+                  <TableCell>{item.orderNumber}</TableCell>
+                  <TableCell>{item.orderDate}</TableCell>
+                  <TableCell>{item.totalCost}</TableCell>
+                  <TableCell>{item.orderDate}</TableCell>
+                  <TableCell>{item.orderDate}</TableCell>
                 </TableRow>
               );
             })}
@@ -78,7 +103,7 @@ class MyOrders extends Component {
         <Button
           color="primary"
           variant="outlined"
-          disabled={totalPrice === 0}
+        
           onClick={() => {
             console.log("purchased");
           }}
@@ -89,7 +114,7 @@ class MyOrders extends Component {
         <Button
           color="secondary"
           variant="outlined"
-          disabled={totalPrice === 0}
+         
           onClick={() => {
             this.props.dispatch(setCheckedOutItems([]));
           }}

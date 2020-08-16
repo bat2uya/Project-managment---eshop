@@ -12,7 +12,7 @@ class Api {
  
     return new Promise((resolve, reject) => {
           axios
-          .post(server.urlHenok + "/orders/create/" + customerID)
+          .post(server.url + "/orders/create/" + customerID)
           .then((result) => {
      
             console.log(result.data);
@@ -35,7 +35,7 @@ class Api {
  
     return new Promise((resolve, reject) => {
           axios
-          .post(server.urlHenok + "/checkout/"+orderNumber )
+          .post(server.url + "/checkout/"+orderNumber )
           .then((result) => {
      
             console.log(result.data);
@@ -59,7 +59,7 @@ class Api {
  
     return new Promise((resolve, reject) => {
           axios
-          .get(server.urlHenok + "/products")
+          .get(server.url + "/products")
           .then((result) => {
      
             console.log(result.data);
@@ -108,7 +108,7 @@ class Api {
     return new Promise((resolve, reject) => {
 
           axios
-          .get(server.urlHenok + "/products")
+          .get(server.url + "/products")
           .then((result) => {
 
       setTimeout(() => {
