@@ -1,0 +1,41 @@
+{
+  "name": "online-shop",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "latest",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@material-ui/styles": "^4.10.0",
+    "axios": "^0.19.2",
+    "firebase": "^7.17.1",
+    "history": "^4.9.0",
+    "jquery": "^3.5.1",
+    "jwt-decode": "^1.4.0",
+    "material-table": "^1.50.0",
+    "query-string": "^6.1.0",
+    "react": "^16.13.1",
+    "react-bootstrap": "0.32.4",
+    "react-dom": "^16.13.1",
+    "react-dropdown": "^1.7.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^3.4.0",
+    "react-simple-tree-menu": "^1.1.18",
+    "redux": "^4.0.0",
+    "rxjs": "^6.3.3",
+    "yup": "^0.27.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
